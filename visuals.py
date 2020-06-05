@@ -77,14 +77,21 @@ def importants(texts):
 
 
 #READ FILE TEXT
-f=open('current.txt','r')
-n=f.read()
 
-text=pdfparser(n)
-f.close()
+def file_read():
+	f=open('current.txt','r')
+	n=f.read()
 
-textc=text
-text=text.split()
+	text=pdfparser(n)
+	f.close()
+
+	textc=text
+	text=text.split()
+	return text,textc
+
+text,textc=file_read()
+
+
 
 
 #TO PRINT PROPERLY

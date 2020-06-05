@@ -1,5 +1,5 @@
 import pdfkit
-config = pdfkit.configuration(wkhtmltopdf='/home/sam/wkhtmltox/bin/wkhtmltopdf')
+config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf.exe')
 import os
 from fpdf import FPDF 
 import fitz
@@ -9,6 +9,7 @@ import pytextrank
 from operator import itemgetter
 from math import sqrt
 import PyPDF2 
+import re
 
 path = "input.pdf"
 
@@ -18,6 +19,8 @@ def getImpPhrases():
     warnings.filterwarnings("ignore")
     tr = pytextrank.TextRank()
     nlp.add_pipe(tr.PipelineComponent, name="textrank", last=True)
+    text=text.lower()
+    text = re.sub(r'^https?:\/\/.*[\r\n]*', '', text, flags=re.MULTILINE)
     doc = nlp(text)
     
     sent_bounds = [ [s.start, s.end, set([])] for s in doc.sents ]
